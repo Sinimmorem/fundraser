@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сайт + бот + реклама за 7 дней — партнёрам</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0D0F1A;
+  --paper: #F5F3EE;
+  --accent: #FF4D1C;
+  --accent2: #1A3CFF;
+  --mid: #6B6B7B;
+  --line: rgba(13,15,26,0.12);
+  --block-r: 20px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Golos Text', sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── ТИПОГРАФИКА ─── */
+.display { font-family: 'Unbounded', sans-serif; line-height: 1.05; letter-spacing: -0.03em; }
+.label {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+
+/* ─── АНИМАЦИИ ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.04); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── ШАПКА ─── */
+header {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(245,243,238,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.logo {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 15px; font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.logo span { color: var(--accent); }
+.nav-cta {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Unbounded', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border: none; border-radius: 50px;
+  padding: 12px 24px; cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+.nav-cta:hover { background: var(--accent); transform: scale(1.04); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 96vh;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 0;
+  padding: 80px 48px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg-circle {
+  position: absolute;
+  right: -120px; top: -80px;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,77,28,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-bg-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 30% 50%, black 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 32px; padding-right: 60px;
+  animation: fadeUp 0.9s ease both;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.dot-live {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+.hero h1 {
+  font-size: clamp(42px, 5.5vw, 76px);
+  font-weight: 900;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+  display: inline-block;
+  position: relative;
+}
+.hero h1 em::after {
+  content: '';
+  position: absolute; left: 0; bottom: 2px;
+  width: 100%; height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.hero-sub {
+  font-size: 19px; color: var(--mid); max-width: 520px; line-height: 1.65;
+}
+.hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 0.06em;
+  border: none; border-radius: 50px;
+  padding: 18px 36px; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none; display: inline-block;
+  animation: pulse 3s ease-in-out infinite;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(255,77,28,0.35); }
+
+.btn-ghost {
+  background: none;
+  color: var(--ink);
+  font-family: 'Unbounded', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.06em;
+  border: 2px solid var(--ink); border-radius: 50px;
+  padding: 16px 32px; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none; display: inline-block;
+}
+.btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+/* HERO CARD */
+.hero-right {
+  display: flex; align-items: center;
+  animation: fadeUp 0.9s 0.2s ease both;
+}
+.hero-card {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 28px;
+  padding: 36px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.hero-card::before {
+  content: '';
+  position: absolute; right: -40px; top: -40px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: rgba(255,77,28,0.15);
+}
+.hero-card-label { color: rgba(245,243,238,0.5); margin-bottom: 20px; }
+.timeline {
+  display: flex; flex-direction: column; gap: 0;
+}
+.tl-item {
+  display: flex; gap: 16px; position: relative;
+  padding-bottom: 20px;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item:not(:last-child) .tl-dot::after {
+  content: '';
+  position: absolute; left: 11px; top: 24px;
+  width: 2px; height: calc(100% - 8px);
+  background: rgba(245,243,238,0.15);
+}
+.tl-dot {
+  position: relative;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Unbounded', sans-serif; font-size: 10px; font-weight: 900;
+  color: #fff; margin-top: 2px;
+}
+.tl-text strong { display: block; font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.tl-text span { font-size: 13px; color: rgba(245,243,238,0.55); }
+
+.hero-card-footer {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(245,243,238,0.12);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.price-tag {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 26px; font-weight: 900;
+}
+.price-tag small {
+  display: block;
+  font-size: 11px; font-weight: 400;
+  color: rgba(245,243,238,0.4);
+  letter-spacing: 0.12em;
+}
+.badge-fast {
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 10px; font-weight: 900;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 8px 14px; border-radius: 50px;
+}
+
+/* ─── БЕГУЩАЯ СТРОКА ─── */
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 0;
+  background: var(--ink);
+}
+.marquee-track {
+  display: flex; gap: 0;
+  white-space: nowrap;
+  animation: marquee 22s linear infinite;
+}
+.marquee-item {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--paper);
+  letter-spacing: 0.08em;
+  padding: 0 40px;
+}
+.marquee-item span { color: var(--accent); margin-right: 40px; }
+
+/* ─── ПРОБЛЕМА ─── */
+.section { padding: 100px 48px; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--line);
+  border-radius: var(--block-r);
+  overflow: hidden;
+  margin-top: 48px;
+}
+.pain-card {
+  background: var(--paper);
+  padding: 36px 32px;
+}
+.pain-no {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 48px; font-weight: 900;
+  color: rgba(13,15,26,0.07);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.pain-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+.pain-card p { color: var(--mid); font-size: 15px; line-height: 1.6; }
+
+/* ─── ЧТО ПРОДАЁТЕ ─── */
+.product-section {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 100px 48px;
+}
+.product-inner { max-width: 1200px; margin: 0 auto; }
+
+.product-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 64px;
+}
+.product-header .label { color: rgba(245,243,238,0.4); }
+.product-header h2 { font-size: clamp(34px, 4vw, 56px); font-weight: 900; }
+.product-header p { color: rgba(245,243,238,0.6); font-size: 17px; margin-top: 20px; }
+
+.product-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+.product-card {
+  background: rgba(245,243,238,0.06);
+  border: 1px solid rgba(245,243,238,0.1);
+  border-radius: 16px;
+  padding: 28px 22px;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  cursor: default;
+}
+.product-card:hover {
+  background: rgba(255,77,28,0.12);
+  border-color: rgba(255,77,28,0.4);
+  transform: translateY(-6px);
+}
+.product-card-icon {
+  font-size: 28px; margin-bottom: 16px;
+}
+.product-card h3 {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+.product-card p {
+  font-size: 13px;
+  color: rgba(245,243,238,0.5);
+  line-height: 1.55;
+}
+
+/* ─── КАК ЭТО РАБОТАЕТ ─── */
+.how-section { padding: 100px 48px; }
+.how-inner { max-width: 1200px; margin: 0 auto; }
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--line);
+  border-radius: var(--block-r);
+  overflow: hidden;
+  margin-top: 56px;
+}
+.how-step {
+  background: var(--paper);
+  padding: 40px 28px;
+  position: relative;
+}
+.step-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.how-step h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+.how-step p { font-size: 14px; color: var(--mid); line-height: 1.6; }
+.how-step-day {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Unbounded', sans-serif;
+  font-size: 10px; font-weight: 700;
+  padding: 4px 10px; border-radius: 20px;
+  margin-top: 16px;
+}
+
+/* ─── ДЛЯ КОГО ─── */
+.for-section {
+  padding: 100px 48px;
+  background: linear-gradient(135deg, #F5F3EE 0%, #EBE8E0 100%);
+}
+.for-inner { max-width: 1200px; margin: 0 auto; }
+.for-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 56px;
+}
+.for-card {
+  border-radius: 24px;
+  padding: 44px 40px;
+  position: relative; overflow: hidden;
+}
+.for-card.yes {
+  background: var(--ink); color: var(--paper);
+}
+.for-card.no {
+  background: rgba(13,15,26,0.05);
+  border: 2px dashed var(--line);
+}
+.for-card-tag {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 11px; font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: inline-block;
+  padding: 6px 14px; border-radius: 20px;
+}
+.for-card.yes .for-card-tag { background: var(--accent); color: #fff; }
+.for-card.no .for-card-tag { background: var(--line); color: var(--mid); }
+.for-card h3 { font-size: 24px; font-weight: 700; margin-bottom: 20px; }
+.for-card.no h3 { color: var(--mid); }
+.for-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  margin-bottom: 12px; font-size: 15px;
+}
+.for-item::before {
+  content: attr(data-icon);
+  flex-shrink: 0; font-size: 16px; margin-top: 1px;
+}
+.for-card.no .for-item { color: var(--mid); }
+
+/* ─── ПАКЕТЫ ─── */
+.pricing-section { padding: 100px 48px; }
+.pricing-inner { max-width: 1200px; margin: 0 auto; }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 56px;
+}
+.pricing-card {
+  border-radius: 24px;
+  padding: 40px 32px;
+  border: 2px solid var(--line);
+  background: var(--paper);
+  position: relative;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.pricing-card:hover { transform: translateY(-8px); border-color: var(--accent); }
+.pricing-card.featured {
+  background: var(--ink); color: var(--paper);
+  border-color: transparent;
+}
+.pricing-card.featured .pricing-price { color: var(--paper); }
+.pricing-card.featured .pricing-per { color: rgba(245,243,238,0.45); }
+.pricing-card.featured .pricing-feature { border-color: rgba(245,243,238,0.12); }
+.pricing-card.featured .pricing-feature-text { color: rgba(245,243,238,0.75); }
+.popular-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #fff;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 10px; font-weight: 900; letter-spacing: 0.12em;
+  padding: 6px 16px; border-radius: 20px; white-space: nowrap;
+}
+.pricing-name {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 8px; color: var(--mid);
+}
+.pricing-card.featured .pricing-name { color: rgba(245,243,238,0.5); }
+.pricing-price {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 36px; font-weight: 900; line-height: 1;
+  margin-bottom: 4px; color: var(--ink);
+}
+.pricing-per { font-size: 13px; color: var(--mid); margin-bottom: 28px; }
+.pricing-feature {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.pricing-feature:first-of-type { border-top: 1px solid var(--line); }
+.pricing-feature-icon { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.pricing-feature-text { color: var(--mid); }
+.pricing-cta {
+  display: block; text-align: center; text-decoration: none;
+  margin-top: 28px;
+  padding: 16px;
+  border-radius: 50px;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: all 0.2s;
+}
+.pricing-card:not(.featured) .pricing-cta {
+  border: 2px solid var(--ink); color: var(--ink);
+}
+.pricing-card:not(.featured) .pricing-cta:hover { background: var(--ink); color: var(--paper); }
+.pricing-card.featured .pricing-cta {
+  background: var(--accent); color: #fff;
+}
+.pricing-card.featured .pricing-cta:hover { transform: scale(1.03); box-shadow: 0 8px 24px rgba(255,77,28,0.35); }
+
+/* ─── ДЛЯ ПАРТНЁРОВ ─── */
+.partner-section {
+  background: var(--accent);
+  color: #fff;
+  padding: 100px 48px;
+}
+.partner-inner { max-width: 1200px; margin: 0 auto; }
+.partner-inner .label { color: rgba(255,255,255,0.6); }
+.partner-inner h2 { font-size: clamp(34px, 4vw, 56px); font-weight: 900; color: #fff; margin: 16px 0 48px; }
+
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.partner-benefit {
+  background: rgba(255,255,255,0.12);
+  border-radius: 20px; padding: 32px 28px;
+  backdrop-filter: blur(8px);
+}
+.partner-benefit-num {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 40px; font-weight: 900;
+  color: rgba(255,255,255,0.2);
+  line-height: 1; margin-bottom: 12px;
+}
+.partner-benefit h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #fff; }
+.partner-benefit p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+/* ─── FAQ ─── */
+.faq-section { padding: 100px 48px; }
+.faq-inner { max-width: 800px; margin: 0 auto; }
+.faq-list { margin-top: 48px; }
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+.faq-q {
+  width: 100%; text-align: left;
+  background: none; border: none; cursor: pointer;
+  padding: 24px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  font-family: 'Golos Text', sans-serif;
+  font-size: 17px; font-weight: 600;
+  color: var(--ink);
+}
+.faq-arrow {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--ink); color: var(--paper);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+  transition: transform 0.3s, background 0.3s;
+}
+.faq-item.open .faq-arrow { transform: rotate(45deg); background: var(--accent); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s;
+  color: var(--mid); line-height: 1.7; font-size: 15px;
+}
+.faq-item.open .faq-a { max-height: 300px; padding-bottom: 24px; }
+
+/* ─── CTA ФИНАЛ ─── */
+.final-section {
+  padding: 120px 48px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.final-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%,
+    rgba(255,77,28,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.final-inner { max-width: 700px; margin: 0 auto; position: relative; }
+.final-inner h2 { font-size: clamp(36px, 5vw, 64px); font-weight: 900; margin-bottom: 20px; }
+.final-inner p { font-size: 18px; color: var(--mid); margin-bottom: 40px; line-height: 1.65; }
+
+.cursor { animation: blink 1s step-end infinite; }
+
+/* ─── ФУТЕР ─── */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 32px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 13px; color: var(--mid);
+}
+.footer-logo { font-family: 'Unbounded', sans-serif; font-size: 14px; font-weight: 900; }
+.footer-logo span { color: var(--accent); }
+
+/* ─── АДАПТИВ ПЛАНШЕТ ─── */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; padding: 60px 28px 48px; min-height: auto; gap: 48px; }
+  .hero-left { padding-right: 0; }
+  .hero-right { justify-content: center; }
+  .hero-card { max-width: 480px; }
+  .product-cards { grid-template-columns: repeat(3, 1fr); }
+  .how-steps { grid-template-columns: repeat(2, 1fr); }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .partner-grid { grid-template-columns: 1fr 1fr; }
+  .for-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── АДАПТИВ МОБИЛЬНЫЙ ─── */
+@media (max-width: 768px) {
+
+  /* Шапка */
+  header { padding: 14px 16px; }
+  .logo { font-size: 13px; }
+  .nav-cta { font-size: 10px; padding: 10px 16px; letter-spacing: 0.06em; }
+
+  /* Секции */
+  .section, .product-section, .how-section, .for-section,
+  .pricing-section, .partner-section, .faq-section, .final-section { padding: 56px 16px; }
+
+  /* Hero */
+  .hero { padding: 36px 16px 32px; gap: 32px; }
+  .hero h1 { font-size: clamp(32px, 8.5vw, 48px); }
+  .hero-sub { font-size: 15px; }
+  .hero-actions { flex-direction: column; align-items: stretch; gap: 12px; }
+  .btn-primary { text-align: center; padding: 16px 20px; font-size: 12px; }
+  .btn-ghost { text-align: center; padding: 14px 20px; font-size: 11px; }
+  .hero-card { padding: 22px 18px; border-radius: 20px; }
+  .price-tag { font-size: 20px; }
+  .badge-fast { font-size: 9px; padding: 6px 12px; }
+
+  /* Боли */
+  .pain-grid { grid-template-columns: 1fr; }
+  .pain-no { font-size: 36px; }
+  .pain-card { padding: 24px 20px; }
+
+  /* Продукт */
+  .product-header { grid-template-columns: 1fr; gap: 20px; }
+  .product-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .product-card { padding: 18px 14px; }
+  .product-card h3 { font-size: 11px; }
+  .product-card p { font-size: 12px; }
+
+  /* Как работает */
+  .how-steps { grid-template-columns: 1fr; }
+  .how-step { padding: 24px 20px; }
+
+  /* Для кого */
+  .for-grid { grid-template-columns: 1fr; }
+  .for-card { padding: 28px 20px; }
+
+  /* Пакеты */
+  .pricing-grid { grid-template-columns: 1fr; max-width: 100%; }
+  .pricing-card { padding: 28px 20px; }
+  .pricing-price { font-size: 28px; }
+
+  /* Партнёрам */
+  .partner-grid { grid-template-columns: 1fr; }
+  .partner-benefit { padding: 24px 20px; }
+
+  /* FAQ */
+  .faq-q { font-size: 14px; }
+
+  /* Финал */
+  .final-section { padding: 72px 16px; }
+  .final-inner p { font-size: 15px; }
+
+  /* Футер */
+  footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 16px; font-size: 12px; }
+}
+
+/* ─── МОБИЛЬНЫЙ: инлайн-гриды ─── */
+@media (max-width: 768px) {
+
+  /* AI-бот блок */
+  .ai-bot-block {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+    padding: 28px 18px !important;
+  }
+
+  /* Живой пример */
+  #example .example-grid {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+
+  /* Отдельные услуги — 1 колонка */
+  #services .services-grid {
+    grid-template-columns: 1fr !important;
+  }
+  #services .services-cta {
+    grid-template-columns: 1fr !important;
+    grid-column: span 1 !important;
+    gap: 20px !important;
+  }
+  #services .services-cta a {
+    white-space: normal !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  /* Финальные кнопки */
+  .final-inner .reveal[style*="display:flex"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .final-inner .btn-ghost {
+    text-align: center;
+  }
+
+  /* Партнёрские карточки */
+  .partner-grid { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── ШАПКА ─── -->
+<header>
+  <div class="logo">SITE<span>·</span>BOT</div>
+  <a href="https://t.me/sinimmorem" class="nav-cta">Стать партнёром</a>
+</header>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-circle"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="dot-live"></div>
+      <span class="label">Для агентств и партнёров</span>
+    </div>
+
+    <h1 class="display">
+      Продающий сайт<br>
+      + бот + реклама<br>
+      за <em>7 дней</em>
+    </h1>
+
+    <p class="hero-sub">
+      Готовый продукт под вашим именем. Вы продаёте —
+      мы производим. Лендинг на Тильде с AI-дизайном,
+      чат-бот с CRM и настроенная контекстная реклама.
+    </p>
+
+    <div class="hero-actions">
+      <a href="https://t.me/sinimmorem" class="btn-primary">Узнать условия партнёрства</a>
+      <a href="#product" class="btn-ghost">Что входит →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="label hero-card-label">Что происходит за 7 дней</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot">1</div>
+          <div class="tl-text">
+            <strong>День 1</strong>
+            <span>Бриф, структура, тексты</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">2</div>
+          <div class="tl-text">
+            <strong>День 2–3</strong>
+            <span>AI-дизайн, сборка на Тильде</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">3</div>
+          <div class="tl-text">
+            <strong>День 4–5</strong>
+            <span>Чат-бот + CRM Salebot</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">4</div>
+          <div class="tl-text">
+            <strong>День 6–7</strong>
+            <span>Контекстная реклама + запуск</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card-footer">
+        <div class="price-tag">
+          от 350 000 ₸
+          
+        </div>
+        <div class="badge-fast">7 дней</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── БЕГУЩАЯ СТРОКА ─── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Лендинг на Тильде <span>✦</span></div>
+    <div class="marquee-item">AI-дизайн <span>✦</span></div>
+    <div class="marquee-item">Чат-бот с ИИ — отвечает как человек <span>✦</span></div>
+    <div class="marquee-item">CRM внутри бота <span>✦</span></div>
+    <div class="marquee-item">Контекстная реклама <span>✦</span></div>
+    <div class="marquee-item">7 рабочих дней <span>✦</span></div>
+    <div class="marquee-item">Продающая структура <span>✦</span></div>
+    <div class="marquee-item">Адаптив desktop + mobile <span>✦</span></div>
+    <div class="marquee-item">Лендинг на Тильде <span>✦</span></div>
+    <div class="marquee-item">AI-дизайн <span>✦</span></div>
+    <div class="marquee-item">Чат-бот с ИИ — отвечает как человек <span>✦</span></div>
+    <div class="marquee-item">CRM внутри бота <span>✦</span></div>
+    <div class="marquee-item">Контекстная реклама <span>✦</span></div>
+    <div class="marquee-item">7 рабочих дней <span>✦</span></div>
+    <div class="marquee-item">Продающая структура <span>✦</span></div>
+    <div class="marquee-item">Адаптив desktop + mobile <span>✦</span></div>
+  </div>
+</div>
+
+<!-- ─── БОЛИ ─── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="label reveal">Знакомая ситуация?</div>
+    <h2 class="display reveal" style="font-size:clamp(32px,4vw,52px);font-weight:900;margin:16px 0 0;max-width:640px;">
+      Клиент хочет сайт.<br>Вы тратите месяц.
+    </h2>
+
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <div class="pain-no">01</div>
+        <h3>Разработчик тянет 4–6 недель</h3>
+        <p>Клиент нервничает, сделка виснет, конкурент уже запустился. Потеря денег и репутации.</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-no">02</div>
+        <h3>Сайт без трафика — просто визитка</h3>
+        <p>Красивый лендинг без рекламы и бота не даёт заявок. Клиент разочарован — претензии к вам.</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-no">03</div>
+        <h3>Собирать команду дорого и долго</h3>
+        <p>Дизайнер, разработчик, таргетолог, копирайтер — это 4 человека, 4 зарплаты, хаос.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ЧТО ПРОДАЁТЕ ─── -->
+<section class="product-section" id="product">
+  <div class="product-inner">
+    <div class="product-header">
+      <div>
+        <div class="label reveal">Продукт</div>
+        <h2 class="display reveal">Один пакет —<br>пять инструментов</h2>
+      </div>
+      <div>
+        <p class="reveal">Всё, что нужно малому бизнесу для старта продаж онлайн. Упаковано в один продукт с фиксированной ценой и сроком.</p>
+      </div>
+    </div>
+
+    <div class="product-cards">
+      <div class="product-card reveal">
+        <div class="product-card-icon">🎨</div>
+        <h3>Лендинг на Тильде</h3>
+        <p>AI-дизайн по вашим референсам. Продающая структура. Адаптив. Подключение домена.</p>
+      </div>
+      <div class="product-card reveal" style="border-color:rgba(255,77,28,0.5);background:rgba(255,77,28,0.1);">
+        <div class="product-card-icon">🤖</div>
+        <h3>AI Чат-бот</h3>
+        <p>Отвечает как живой менеджер. ИИ понимает вопрос и даёт нужный ответ — 24/7, без задержек.</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-card-icon">📊</div>
+        <h3>CRM внутри бота</h3>
+        <p>Все заявки — в одном месте. Статусы, история, напоминания. Без лишних сервисов.</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-card-icon">🎯</div>
+        <h3>Контекстная реклама</h3>
+        <p>Google Ads / Яндекс. Настройка кампаний под целевую аудиторию с первого дня.</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-card-icon">⚡</div>
+        <h3>Запуск за 7 дней</h3>
+        <p>От брифа до первой заявки — ровно неделя. Никаких «ещё чуть-чуть».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AI БОТ ВЫДЕЛЕННЫЙ БЛОК ─── -->
+<section style="padding:0 48px 80px;background:var(--ink);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="ai-bot-block reveal" style="
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border-radius:28px;
+      padding:64px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(255,77,28,0.25);
+    ">
+      <!-- декоративные круги -->
+      <div style="position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,77,28,0.08);pointer-events:none;"></div>
+      <div style="position:absolute;left:40%;bottom:-80px;width:200px;height:200px;border-radius:50%;background:rgba(26,60,255,0.1);pointer-events:none;"></div>
+
+      <div style="position:relative;">
+        <div style="display:inline-flex;align-items:center;gap:10px;margin-bottom:24px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:#FF4D1C;animation:pulse 2s ease-in-out infinite;"></div>
+          <span style="font-family:'Unbounded',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);">Главная фишка продукта</span>
+        </div>
+        <h2 class="display" style="font-size:clamp(28px,3.5vw,46px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:20px;">
+          Бот с ИИ, который<br>отвечает <span style="color:#FF4D1C;">как человек</span>
+        </h2>
+        <p style="color:rgba(255,255,255,0.6);font-size:16px;line-height:1.7;margin-bottom:28px;">
+          Не скрипт с кнопками. Не шаблонные фразы. Настоящий ИИ-менеджер, который читает вопрос клиента, понимает контекст и отвечает живым языком — как опытный продажник, только без зарплаты и выходных.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,77,28,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="color:#FF4D1C;font-size:13px;font-weight:700;">✦</span>
+            </div>
+            <span style="color:rgba(255,255,255,0.8);font-size:15px;">Работает в Telegram, WhatsApp, Instagram</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,77,28,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="color:#FF4D1C;font-size:13px;font-weight:700;">✦</span>
+            </div>
+            <span style="color:rgba(255,255,255,0.8);font-size:15px;">Квалифицирует лидов и передаёт в CRM</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,77,28,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="color:#FF4D1C;font-size:13px;font-weight:700;">✦</span>
+            </div>
+            <span style="color:rgba(255,255,255,0.8);font-size:15px;">Отвечает за 3 секунды — в 3 часа ночи тоже</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,77,28,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="color:#FF4D1C;font-size:13px;font-weight:700;">✦</span>
+            </div>
+            <span style="color:rgba(255,255,255,0.8);font-size:15px;">Не теряет ни одну заявку с сайта</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Имитация чата -->
+      <div style="position:relative;">
+        <div style="
+          background:rgba(255,255,255,0.05);
+          border:1px solid rgba(255,255,255,0.1);
+          border-radius:20px;
+          padding:24px;
+          font-size:14px;
+        ">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.08);">
+            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#FF4D1C,#ff8c00);display:flex;align-items:center;justify-content:center;font-size:16px;">🤖</div>
+            <div>
+              <div style="color:#fff;font-weight:600;font-size:13px;">AI-менеджер</div>
+              <div style="color:#4ade80;font-size:11px;">● онлайн</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;justify-content:flex-end;">
+              <div style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.85);padding:10px 14px;border-radius:14px 14px 4px 14px;max-width:75%;font-size:13px;line-height:1.5;">
+                Добрый день, сколько стоит ваш сайт?
+              </div>
+            </div>
+
+            <div style="display:flex;gap:10px;align-items:flex-end;">
+              <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#FF4D1C,#ff8c00);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">🤖</div>
+              <div style="background:rgba(255,77,28,0.15);border:1px solid rgba(255,77,28,0.3);color:rgba(255,255,255,0.9);padding:10px 14px;border-radius:14px 14px 14px 4px;max-width:80%;font-size:13px;line-height:1.6;">
+                Привет! Зависит от задачи. У нас три пакета — от 350 000 ₸. Скажите, что нужно: просто сайт или сайт с рекламой и автоматическим приёмом заявок?
+              </div>
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;">
+              <div style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.85);padding:10px 14px;border-radius:14px 14px 4px 14px;max-width:75%;font-size:13px;line-height:1.5;">
+                Хочу чтобы заявки сами приходили
+              </div>
+            </div>
+
+            <div style="display:flex;gap:10px;align-items:flex-end;">
+              <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#FF4D1C,#ff8c00);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">🤖</div>
+              <div style="background:rgba(255,77,28,0.15);border:1px solid rgba(255,77,28,0.3);color:rgba(255,255,255,0.9);padding:10px 14px;border-radius:14px 14px 14px 4px;max-width:80%;font-size:13px;line-height:1.6;">
+                Тогда вам подойдёт пакет «Бизнес» — лендинг + я (чат-бот) + CRM. Все заявки автоматически. Готово за 7 дней. Оставьте номер — менеджер перезвонит? 😊
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:8px;">
+            <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:20px;padding:8px 14px;color:rgba(255,255,255,0.3);font-size:12px;">Написать сообщение...</div>
+            <div style="width:32px;height:32px;border-radius:50%;background:#FF4D1C;display:flex;align-items:center;justify-content:center;font-size:14px;">→</div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:14px;">
+          <span style="font-size:12px;color:rgba(255,255,255,0.3);font-family:'Unbounded',sans-serif;letter-spacing:0.08em;">ТАК ВЫГЛЯДИТ ЖИВОЙ ДИАЛОГ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── КАК РАБОТАЕТ ─── -->
+<section class="how-section">
+  <div class="how-inner">
+    <div class="label reveal">Процесс</div>
+    <h2 class="display reveal" style="font-size:clamp(32px,4vw,52px);font-weight:900;margin:16px 0 0;">
+      Как это работает
+    </h2>
+
+    <div class="how-steps">
+      <div class="how-step reveal">
+        <div class="step-num">ШАГ 01</div>
+        <h3>Вы приводите клиента</h3>
+        <p>Находите заказчика, который хочет сайт + маркетинг. Согласуете пакет и цену.</p>
+        <span class="how-step-day">Ваша работа</span>
+      </div>
+      <div class="how-step reveal">
+        <div class="step-num">ШАГ 02</div>
+        <h3>Мы собираем бриф</h3>
+        <p>Общаемся с клиентом напрямую или через вас. Получаем все материалы и референсы.</p>
+        <span class="how-step-day">День 1</span>
+      </div>
+      <div class="how-step reveal">
+        <div class="step-num">ШАГ 03</div>
+        <h3>Производство</h3>
+        <p>Тексты → AI-дизайн → Тильда → бот → реклама. Всё под ключ, без вашего участия.</p>
+        <span class="how-step-day">Дни 2–6</span>
+      </div>
+      <div class="how-step reveal">
+        <div class="step-num">ШАГ 04</div>
+        <h3>Сдача и ваш заработок</h3>
+        <p>Клиент принимает работу. Ваша маржа остаётся у вас — мы не видим итоговую цену.</p>
+        <span class="how-step-day">День 7</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ДЛЯ КОГО ─── -->
+<section class="for-section">
+  <div class="for-inner">
+    <div class="label reveal">Партнёрам</div>
+    <h2 class="display reveal" style="font-size:clamp(32px,4vw,52px);font-weight:900;margin:16px 0 48px;">
+      Это для вас — если…
+    </h2>
+
+    <div class="for-grid">
+      <div class="for-card yes reveal">
+        <div class="for-card-tag">✓ Подходит</div>
+        <h3>Вы работаете с малым бизнесом</h3>
+        <div class="for-item" data-icon="✦">У вас есть клиенты, которым нужен сайт или маркетинг</div>
+        <div class="for-item" data-icon="✦">Вы маркетолог, бизнес-консультант, таргетолог или SMM</div>
+        <div class="for-item" data-icon="✦">Вы продаёте смежные услуги и хотите расширить чек</div>
+        <div class="for-item" data-icon="✦">Вам нужен надёжный подрядчик без согласований и простоев</div>
+        <div class="for-item" data-icon="✦">Вы хотите зарабатывать на разнице, не делая сайты сами</div>
+      </div>
+
+      <div class="for-card no reveal">
+        <div class="for-card-tag">✕ Не подходит</div>
+        <h3>Не стоит работать вместе, если…</h3>
+        <div class="for-item" data-icon="✕">Вы ищете самый дешёвый вариант без гарантий</div>
+        <div class="for-item" data-icon="✕">Хотите платить после того, как клиент заплатит вам</div>
+        <div class="for-item" data-icon="✕">Нет конкретного клиента — просто «прощупываете рынок»</div>
+        <div class="for-item" data-icon="✕">Клиент хочет что-то переделывать бесконечно без бриза</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ПАКЕТЫ ─── -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-inner">
+    <div class="label reveal">Пакеты</div>
+    <h2 class="display reveal" style="font-size:clamp(32px,4vw,52px);font-weight:900;margin:16px 0 8px;">
+      Фиксированная цена.<br>Никаких сюрпризов.
+    </h2>
+    <p class="reveal" style="color:var(--mid);margin-top:12px;font-size:16px;">Ваша наценка — ваше дело. Мы работаем с оптовой ценой.</p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Старт</div>
+        <div class="pricing-price">350 000 ₸</div>
+        <div class="pricing-per">базовая цена для партнёра</div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span class="pricing-feature-text">Лендинг до 12 блоков</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span class="pricing-feature-text">AI-дизайн по референсам</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span class="pricing-feature-text">Структура AIDA + заголовки 4U</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon" style="color:var(--accent);">🤖</span><span class="pricing-feature-text" style="font-weight:600;color:var(--ink);">AI чат-бот + месяц сервиса</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span class="pricing-feature-text">Адаптив desktop + mobile</span></div>
+        <a href="https://t.me/sinimmorem" class="pricing-cta">Обсудить</a>
+      </div>
+
+      <div class="pricing-card featured reveal">
+        <div class="popular-badge">ПОПУЛЯРНЫЙ</div>
+        <div class="pricing-name">Бизнес</div>
+        <div class="pricing-price">550 000 ₸</div>
+        <div class="pricing-per">базовая цена для партнёра</div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span class="pricing-feature-text">Лендинг до 12 блоков</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">🤖</span><span class="pricing-feature-text">AI чат-бот Salebot + CRM</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span class="pricing-feature-text">Сценарий продажи в боте</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span class="pricing-feature-text">Аналитика + домен</span></div>
+        <a href="https://t.me/sinimmorem" class="pricing-cta">Стать партнёром</a>
+      </div>
+
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Полный</div>
+        <div class="pricing-price">650 000 ₸</div>
+        <div class="pricing-per">базовая цена для партнёра</div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span class="pricing-feature-text">Лендинг + AI бот + CRM</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span class="pricing-feature-text">Контекстная реклама</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span class="pricing-feature-text">Структуру проверяет контекстолог</span></div>
+        <div class="pricing-feature"><span class="pricing-feature-icon">✦</span><span class="pricing-feature-text">Всё под ключ за 7 дней</span></div>
+        <a href="https://t.me/sinimmorem" class="pricing-cta">Обсудить</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ПАРТНЁРАМ ─── -->
+<section class="partner-section">
+  <div class="partner-inner">
+    <div class="label reveal">Почему выгодно</div>
+    <h2 class="display reveal">Зарабатывайте<br>на готовом продукте</h2>
+    <div class="partner-grid">
+      <div class="partner-benefit reveal">
+        <div class="partner-benefit-num">01</div>
+        <h3>Маржа остаётся вам</h3>
+        <p>Мы называем оптовую цену. Сколько поставить клиенту — ваше решение. Разница полностью ваша.</p>
+      </div>
+      <div class="partner-benefit reveal">
+        <div class="partner-benefit-num">02</div>
+        <h3>Ничего не надо делать руками</h3>
+        <p>Вы продаёте — мы производим. Дизайн, тексты, сборка, бот, реклама — всё на нас.</p>
+      </div>
+      <div class="partner-benefit reveal">
+        <div class="partner-benefit-num">03</div>
+        <h3>Быстрый результат = довольный клиент</h3>
+        <p>7 дней — клиент счастлив, рекомендует вас дальше. Скорость — ваше конкурентное преимущество.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="label reveal">Вопросы</div>
+    <h2 class="display reveal" style="font-size:clamp(30px,3.5vw,48px);font-weight:900;margin:16px 0 0;">
+      Часто спрашивают
+    </h2>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q">
+          Как клиент узнает, что делаете не вы?
+          <div class="faq-arrow">+</div>
+        </button>
+        <div class="faq-a">Никак — если не скажете. Мы работаем как ваш «белый лейбл» подрядчик. Все коммуникации с клиентом ведёте вы. Мы не контактируем с вашими клиентами напрямую без вашего согласия.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Что если клиент потребует правок?
+          <div class="faq-arrow">+</div>
+        </button>
+        <div class="faq-a">Два раунда правок включены в стоимость. Мы вносим изменения быстро — в течение 2 рабочих дней. Смена концепции и кардинальные переделки — по отдельной смете.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Реально ли сделать за 7 дней с нуля?
+          <div class="faq-arrow">+</div>
+        </button>
+        <div class="faq-a">Да — при условии, что клиент даёт материалы вовремя. Мы написали регламент, который фиксирует это в договоре: срок сдвигается, только если клиент задержал материалы. Иначе — 7 дней.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Нужна ли предоплата от клиента?
+          <div class="faq-arrow">+</div>
+        </button>
+        <div class="faq-a">Мы работаем по 100% предоплате. Как вы выстраиваете расчёты с вашим клиентом — ваше дело. Главное, что перед стартом работ мы должны получить оплату от вас.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Что нужно от клиента для старта?
+          <div class="faq-arrow">+</div>
+        </button>
+        <div class="faq-a">Логотип, фотографии, описание бизнеса, 3–5 референсов сайтов, которые нравятся, и антипример. Мы пришлём готовую форму брифа — клиент заполняет сам, это занимает 15–20 минут.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ПРИМЕР САЙТА ─── -->
+<section style="padding:100px 48px;background:var(--ink);overflow:hidden;" id="example">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;" class="reveal">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite;flex-shrink:0;"></div>
+      <span style="font-family:'Unbounded',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,243,238,0.4);">Живой пример</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;" class="reveal example-grid">
+
+      <!-- Левая — текст + теги + CTA -->
+      <div>
+        <h2 class="display" style="font-size:clamp(28px,3.5vw,48px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:24px;">
+          Вот как это<br>выглядит в деле
+        </h2>
+        <p style="color:rgba(245,243,238,0.6);font-size:16px;line-height:1.75;margin-bottom:32px;">
+          Строительная компания. Лендинг сделан по AIDA — от боли к действию. Заголовки по 4U: конкретные, с выгодой, срочностью и уникальностью. Уникальный AI-дизайн, ни одного стокового шаблона.
+        </p>
+
+        <!-- Теги -->
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px;">
+          <span style="background:rgba(255,77,28,0.15);border:1px solid rgba(255,77,28,0.35);color:var(--accent);font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:7px 14px;border-radius:20px;">AIDA структура</span>
+          <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(245,243,238,0.75);font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:7px 14px;border-radius:20px;">Заголовки 4U</span>
+          <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(245,243,238,0.75);font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:7px 14px;border-radius:20px;">AI-дизайн</span>
+          <span style="background:rgba(255,77,28,0.15);border:1px solid rgba(255,77,28,0.35);color:var(--accent);font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:7px 14px;border-radius:20px;">ИИ чат-бот</span>
+          <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(245,243,238,0.75);font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:7px 14px;border-radius:20px;">Тильда</span>
+          <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(245,243,238,0.75);font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:7px 14px;border-radius:20px;">7 дней</span>
+        </div>
+
+        <!-- Фичи -->
+        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:40px;">
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,77,28,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;">🎯</div>
+            <div>
+              <div style="color:#fff;font-weight:600;font-size:15px;margin-bottom:3px;">Готов под рекламный трафик</div>
+              <div style="color:rgba(245,243,238,0.5);font-size:13px;line-height:1.55;">Структура проверена контекстологом — конверсия растёт с первого дня запуска</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,77,28,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;">🤖</div>
+            <div>
+              <div style="color:#fff;font-weight:600;font-size:15px;margin-bottom:3px;">ИИ чат-бот отвечает как менеджер</div>
+              <div style="color:rgba(245,243,238,0.5);font-size:13px;line-height:1.55;">Ни одна заявка не теряется — бот перехватывает интерес прямо на сайте, 24/7</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,77,28,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;">⚡</div>
+            <div>
+              <div style="color:#fff;font-weight:600;font-size:15px;margin-bottom:3px;">Сделано за 7 дней с нуля</div>
+              <div style="color:rgba(245,243,238,0.5);font-size:13px;line-height:1.55;">Ни шаблона, ни конструктора «на коленке» — уникальный дизайн под нишу</div>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://it-trend65.ru/dom" target="_blank" style="display:inline-flex;align-items:center;gap:10px;padding:18px 32px;border-radius:50px;background:var(--accent);color:#fff;font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.06em;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;" onmouseenter="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 32px rgba(255,77,28,0.4)'" onmouseleave="this.style.transform='none';this.style.boxShadow='none'">
+          Открыть сайт и посмотреть
+          <span style="font-size:16px;">→</span>
+        </a>
+        <div style="margin-top:14px;font-size:12px;color:rgba(245,243,238,0.3);font-family:'Unbounded',sans-serif;letter-spacing:0.06em;">it-trend65.ru/dom</div>
+      </div>
+
+      <!-- Правая — браузер-макет со скроллом -->
+      <div style="position:relative;display:flex;justify-content:center;">
+
+        <!-- Браузер-рамка -->
+        <div style="
+          width:100%;
+          max-width:460px;
+          border-radius:16px;
+          overflow:hidden;
+          border:1px solid rgba(255,255,255,0.12);
+          box-shadow:0 32px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.05);
+          position:relative;
+        ">
+          <!-- Браузер топбар -->
+          <div style="
+            background:#1e1e2e;
+            padding:12px 16px;
+            display:flex;align-items:center;gap:10px;
+            border-bottom:1px solid rgba(255,255,255,0.08);
+            flex-shrink:0;
+          ">
+            <div style="display:flex;gap:6px;">
+              <div style="width:12px;height:12px;border-radius:50%;background:#ff5f57;"></div>
+              <div style="width:12px;height:12px;border-radius:50%;background:#febc2e;"></div>
+              <div style="width:12px;height:12px;border-radius:50%;background:#28c840;"></div>
+            </div>
+            <div style="flex:1;background:rgba(255,255,255,0.07);border-radius:6px;padding:5px 12px;font-size:11px;color:rgba(255,255,255,0.35);font-family:'Golos Text',sans-serif;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+              it-trend65.ru/dom
+            </div>
+            <div style="width:7px;height:7px;border-radius:50%;background:#28c840;flex-shrink:0;"></div>
+          </div>
+
+          <!-- Скроллящийся скрин -->
+          <div style="
+            height:520px;
+            overflow:hidden;
+            position:relative;
+            cursor:pointer;
+          " onmouseenter="this.querySelector('.scroll-inner').style.transform='translateY(calc(-100% + 520px))'" onmouseleave="this.querySelector('.scroll-inner').style.transform='translateY(0)'">
+            <div class="scroll-inner" style="
+              transition:transform 4s cubic-bezier(0.25,0.46,0.45,0.94);
+              transform:translateY(0);
+              will-change:transform;
+            ">
+              <img src="screen.png"
+                style="width:100%;display:block;"
+                alt="Пример лендинга — it-trend65.ru/dom">
+            </div>
+            <!-- Градиент снизу — подсказка что есть ещё -->
+            <div style="
+              position:absolute;bottom:0;left:0;right:0;height:100px;
+              background:linear-gradient(to bottom,transparent,rgba(13,15,26,0.9));
+              pointer-events:none;
+              z-index:2;
+            "></div>
+            <!-- Подсказка hover -->
+            <div style="
+              position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
+              background:rgba(13,15,26,0.8);
+              backdrop-filter:blur(8px);
+              border:1px solid rgba(255,255,255,0.1);
+              border-radius:20px;
+              padding:7px 16px;
+              font-family:'Unbounded',sans-serif;
+              font-size:9px;font-weight:700;letter-spacing:0.1em;
+              color:rgba(255,255,255,0.5);
+              white-space:nowrap;
+              z-index:3;
+              pointer-events:none;
+            ">▼ НАВЕДИТЕ ЧТОБЫ ПРОКРУТИТЬ</div>
+          </div>
+        </div>
+
+        <!-- Бейдж ЖИВОЙ САЙТ -->
+        <div style="
+          position:absolute;top:-14px;right:0;
+          background:rgba(13,15,26,0.9);
+          backdrop-filter:blur(8px);
+          border:1px solid rgba(40,200,64,0.4);
+          border-radius:20px;
+          padding:8px 14px;
+          display:flex;align-items:center;gap:8px;
+          z-index:4;
+        ">
+          <div style="width:7px;height:7px;border-radius:50%;background:#28c840;animation:pulse 2s ease-in-out infinite;"></div>
+          <span style="font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.06em;color:#fff;">ЖИВОЙ САЙТ</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ОТДЕЛЬНЫЕ УСЛУГИ ─── -->
+<section style="padding:100px 48px;background:var(--paper);" id="services">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="label reveal">Отдельные услуги</div>
+    <h2 class="display reveal" style="font-size:clamp(32px,4vw,52px);font-weight:900;margin:16px 0 12px;">
+      Нужно что-то одно?
+    </h2>
+    <p class="reveal" style="color:var(--mid);font-size:17px;margin-bottom:56px;max-width:560px;">Берём отдельные задачи. Собирайте нужный набор под бюджет клиента.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;" class="reveal services-grid">
+
+      <!-- Лендинг -->
+      <div style="border-radius:20px;border:2px solid var(--line);padding:36px 32px;background:var(--paper);transition:border-color 0.3s,transform 0.3s;" onmouseenter="this.style.borderColor='var(--accent)';this.style.transform='translateY(-6px)'" onmouseleave="this.style.borderColor='var(--line)';this.style.transform='translateY(0)'">
+        <div style="font-size:32px;margin-bottom:16px;">🖥️</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;">Лендинг</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:28px;font-weight:900;line-height:1;margin-bottom:4px;">200 000 ₸</div>
+        <div style="font-size:13px;color:var(--mid);margin-bottom:24px;">до 12 блоков, уникальный дизайн</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--mid);">
+          <div>✦ AI-дизайн по вашим референсам</div>
+          <div>✦ Продающая структура по AIDA</div>
+          <div>✦ Заголовки по методу 4U</div>
+          <div>✦ Адаптив desktop + mobile</div>
+          <div>✦ Подключение домена</div>
+        </div>
+        <div style="margin-top:20px;padding:14px 16px;border-radius:12px;background:rgba(255,77,28,0.07);border:1px solid rgba(255,77,28,0.15);font-size:13px;color:var(--ink);line-height:1.55;">
+          <span style="color:var(--accent);font-weight:700;">+ При заказе с рекламой:</span> структуру проверяет контекстолог + повышаем конверсию в течение месяца
+        </div>
+      </div>
+
+      <!-- Контекстная реклама -->
+      <div style="border-radius:20px;border:2px solid var(--line);padding:36px 32px;background:var(--paper);transition:border-color 0.3s,transform 0.3s;" onmouseenter="this.style.borderColor='var(--accent)';this.style.transform='translateY(-6px)'" onmouseleave="this.style.borderColor='var(--line)';this.style.transform='translateY(0)'">
+        <div style="font-size:32px;margin-bottom:16px;">🎯</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;">Контекстная реклама</div>
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px;">
+          <div style="font-family:'Unbounded',sans-serif;font-size:28px;font-weight:900;line-height:1;">100 000 ₸</div>
+        </div>
+        <div style="font-size:13px;color:var(--mid);margin-bottom:24px;">настройка и запуск</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--mid);">
+          <div>✦ Google Ads / Яндекс.Директ</div>
+          <div>✦ Сбор семантики под нишу</div>
+          <div>✦ Настройка кампаний и объявлений</div>
+          <div>✦ UTM-метки + аналитика</div>
+        </div>
+        <div style="margin-top:20px;padding:14px 16px;border-radius:12px;background:rgba(13,15,26,0.05);border:1px solid var(--line);font-size:13px;color:var(--ink);line-height:1.55;">
+          <span style="font-weight:700;">Ведение:</span> + 100 000 ₸/мес — оптимизация кампаний, отчёты, A/B тесты объявлений
+        </div>
+      </div>
+
+      <!-- AI Чат-бот -->
+      <div style="border-radius:20px;border:2px solid rgba(255,77,28,0.3);padding:36px 32px;background:rgba(255,77,28,0.04);transition:border-color 0.3s,transform 0.3s;position:relative;" onmouseenter="this.style.borderColor='var(--accent)';this.style.transform='translateY(-6px)'" onmouseleave="this.style.borderColor='rgba(255,77,28,0.3)';this.style.transform='translateY(0)'">
+        <div style="position:absolute;top:-12px;right:20px;background:var(--accent);color:#fff;font-family:'Unbounded',sans-serif;font-size:10px;font-weight:900;letter-spacing:0.1em;padding:5px 12px;border-radius:20px;">ИИ</div>
+        <div style="font-size:32px;margin-bottom:16px;">🤖</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;">AI Чат-бот</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:28px;font-weight:900;line-height:1;margin-bottom:4px;">100 000 ₸</div>
+        <div style="font-size:13px;color:var(--mid);margin-bottom:24px;">настройка + подключение к сайту</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--mid);">
+          <div>✦ Salebot + ИИ-ответы как живой менеджер</div>
+          <div>✦ Сценарий продажи под нишу клиента</div>
+          <div>✦ Подключение к сайту / мессенджерам</div>
+          <div>✦ Telegram / WhatsApp / Instagram</div>
+        </div>
+        <div style="margin-top:20px;padding:14px 16px;border-radius:12px;background:rgba(255,77,28,0.08);border:1px solid rgba(255,77,28,0.2);font-size:13px;color:var(--ink);line-height:1.55;">
+          <span style="color:var(--accent);font-weight:700;">Включено:</span> оплата сервиса Salebot на 1 месяц — без скрытых доплат
+        </div>
+      </div>
+
+      <!-- CRM -->
+      <div style="border-radius:20px;border:2px solid var(--line);padding:36px 32px;background:var(--paper);transition:border-color 0.3s,transform 0.3s;" onmouseenter="this.style.borderColor='var(--accent)';this.style.transform='translateY(-6px)'" onmouseleave="this.style.borderColor='var(--line)';this.style.transform='translateY(0)'">
+        <div style="font-size:32px;margin-bottom:16px;">📊</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;">CRM</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:28px;font-weight:900;line-height:1;margin-bottom:4px;">100 000 ₸</div>
+        <div style="font-size:13px;color:var(--mid);margin-bottom:24px;">настройка Salebot CRM</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--mid);">
+          <div>✦ Настройка Salebot CRM под бизнес</div>
+          <div>✦ Воронка сделок и статусы заявок</div>
+          <div>✦ Все заявки с сайта — в одном месте</div>
+          <div>✦ Подключение к чат-боту и форме</div>
+          <div>✦ Инструкция для менеджеров</div>
+        </div>
+      </div>
+
+      <!-- Битрикс24 -->
+      <div style="border-radius:20px;border:2px solid var(--line);padding:36px 32px;background:var(--paper);transition:border-color 0.3s,transform 0.3s;position:relative;" onmouseenter="this.style.borderColor='var(--accent2)';this.style.transform='translateY(-6px)'" onmouseleave="this.style.borderColor='var(--line)';this.style.transform='translateY(0)'">
+        <div style="position:absolute;top:-12px;right:20px;background:var(--accent2);color:#fff;font-family:'Unbounded',sans-serif;font-size:10px;font-weight:900;letter-spacing:0.1em;padding:5px 12px;border-radius:20px;">ПО ЗАПРОСУ</div>
+        <div style="font-size:32px;margin-bottom:16px;">🏢</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;">Битрикс24</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:22px;font-weight:900;line-height:1;margin-bottom:4px;color:var(--accent2);">Стоимость по запросу</div>
+        <div style="font-size:13px;color:var(--mid);margin-bottom:24px;">настройка и внедрение CRM</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--mid);">
+          <div>✦ Настройка воронок продаж</div>
+          <div>✦ Подключение сайта, почты, телефонии</div>
+          <div>✦ Автоматизация задач и сделок</div>
+          <div>✦ Обучение команды</div>
+          <div>✦ Объём зависит от задачи бизнеса</div>
+        </div>
+      </div>
+
+      <!-- AmoCRM -->
+      <div style="border-radius:20px;border:2px solid var(--line);padding:36px 32px;background:var(--paper);transition:border-color 0.3s,transform 0.3s;position:relative;" onmouseenter="this.style.borderColor='var(--accent2)';this.style.transform='translateY(-6px)'" onmouseleave="this.style.borderColor='var(--line)';this.style.transform='translateY(0)'">
+        <div style="position:absolute;top:-12px;right:20px;background:var(--accent2);color:#fff;font-family:'Unbounded',sans-serif;font-size:10px;font-weight:900;letter-spacing:0.1em;padding:5px 12px;border-radius:20px;">ПО ЗАПРОСУ</div>
+        <div style="font-size:32px;margin-bottom:16px;">💼</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;">AmoCRM</div>
+        <div style="font-family:'Unbounded',sans-serif;font-size:22px;font-weight:900;line-height:1;margin-bottom:4px;color:var(--accent2);">Стоимость по запросу</div>
+        <div style="font-size:13px;color:var(--mid);margin-bottom:24px;">настройка и внедрение CRM</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--mid);">
+          <div>✦ Настройка воронок и этапов сделок</div>
+          <div>✦ Интеграция с сайтом и мессенджерами</div>
+          <div>✦ Автоматические задачи и напоминания</div>
+          <div>✦ Обучение менеджеров работе в системе</div>
+          <div>✦ Объём зависит от задачи бизнеса</div>
+        </div>
+      </div>
+
+      <!-- CTA-карточка — занимает 3 колонки -->
+      <div class="services-cta" style="border-radius:20px;background:var(--ink);padding:36px 40px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:32px;grid-column:span 3;">
+        <div>
+          <div style="font-family:'Unbounded',sans-serif;font-size:20px;font-weight:900;color:#fff;line-height:1.3;margin-bottom:12px;">Нужна индивидуальная сборка?</div>
+          <div style="font-size:15px;color:rgba(245,243,238,0.55);line-height:1.65;max-width:640px;">Мультистраничный сайт, интернет-магазин, Битрикс24, AmoCRM — напишите задачу, обсудим объём и составим смету.</div>
+        </div>
+        <a href="https://t.me/@sinimmorem" style="display:inline-block;white-space:nowrap;padding:16px 28px;border-radius:50px;background:var(--accent);color:#fff;font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-decoration:none;transition:opacity 0.2s;flex-shrink:0;" onmouseenter="this.style.opacity='0.85'" onmouseleave="this.style.opacity='1'">Написать в Telegram</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ФИНАЛ ─── -->
+<section class="final-section" id="contact">
+  <div class="final-inner">
+    <div class="label reveal" style="display:inline-block;margin-bottom:24px;">Следующий шаг</div>
+    <h2 class="display reveal">
+      Готовы добавить...<br>в линейку продуктов?<span class="cursor">_</span>
+    </h2>
+    <p class="reveal">Напишите нам — расскажем условия, ответим на вопросы и договоримся о первом совместном проекте.</p>
+    <div class="reveal" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://t.me/@sinimmorem" class="btn-primary" style="font-size:14px;padding:20px 40px;">
+        Написать в Telegram
+      </a>
+      <a href="https://wa.me/77086442654" class="btn-ghost" style="font-size:13px;">
+        WhatsApp →
+      </a>
+    </div>
+    <p class="reveal" style="margin-top:28px;font-size:13px;color:var(--mid);">Отвечаем в течение 2 часов в рабочее время</p>
+  </div>
+</section>
+
+<!-- ─── ФУТЕР ─── -->
+<footer>
+  <div class="footer-logo">SITE<span>·</span>BOT</div>
+  <div>Лендинги · Боты · Реклама за 7 дней</div>
+  <div>© 2026</div>
+</footer>
+
+<script>
+// ─── СКРОЛЛ-REVEAL ───
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+// ─── FAQ ───
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ─── ПЛАВНЫЙ СКРОЛЛ ДЛЯ ЯКОРЕЙ ───
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>
